@@ -1,0 +1,30 @@
+function split(img, up, down, left, right)
+
+
+    global threshold;
+    global min_widith;
+    global mean_matrix;
+    global index;
+    glo
+    temp_img = img(up:down,left:right);
+    
+    
+    temp_vec = temp_img(:);
+    img_mean = mean(temp_vec);
+    img_std = std(temp_vec);
+    [x, y] = size(temp_img);
+    
+    if(img_std > threshold && x > min_widith)
+        half_x = floor((left+right)/2);
+        half_y = floor((up+down)/2);
+        
+       split(img, up, up + half_y, left , left + half_x);
+       split(img, up, up + half_y, left + half_x + 1, right );
+       split(img, up + half_y + 1, down , left , left + half_x);
+       split(img, up + half_y + 1, down , left + half_x + 1, right);
+    else
+       segRes(up:down,left:right) = index;
+       mean_matrix(up:down,left:right) = img_mean;
+       index = index + 1;
+    end
+end
