@@ -1,0 +1,16 @@
+clear all;
+close all;
+
+
+im1 = imread('ferrari.bmp');
+
+subplot(2,2,1);
+imshow(im1);
+
+se = strel('square', 3);
+
+im_er = imerode(im1, se);
+im_dil = imdilate(im1, se);
+
+subplot(2,2,2);
+imshow(im_e
